@@ -36,5 +36,9 @@ RSpec.describe Calc do
     it 'calculates nine divided by three' do
       expect(Calc.new.nine.divided_by.three).to eq(3)
     end
+
+    it 'raises an error when dividing by zero' do
+      expect { Calc.new.one.divided_by.zero }.to raise_error(RuntimeError, 'Division by zero error')
+    end
   end
 end

@@ -1,10 +1,10 @@
 class Calc
-  def initialize(value = 0, pending_operation = nil)
+  def initialize(value = 0, operation = nil)
     @value = value
-    @pending_operation = pending_operation
+    @operation = operation
   end
 
-  # Operation methods return a Proc representing the operation
+  # Defines operation methods
   {
     plus: :+,
     minus: :-,
@@ -16,14 +16,16 @@ class Calc
     end
   end
 
-  # Digit methods
+  # Defines digit methods
   {
     zero: 0, one: 1, two: 2, three: 3, four: 4,
     five: 5, six: 6, seven: 7, eight: 8, nine: 9
   }.each do |name, num|
     define_method(name) do
-      if @pending_operation
-        @value.send(@pending_operation, num)
+      if @operation
+        raise 'Division by zero error' if @operation == :/ && num == 0
+
+        @value.send(@operation, num)
       else
         Calc.new(num)
       end
