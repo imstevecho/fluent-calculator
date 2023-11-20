@@ -37,6 +37,30 @@ RSpec.describe Calc do
       expect(Calc.new.nine.divided_by.three).to eq(3)
     end
 
+    it 'raises an error for undefined methods' do
+      expect { Calc.new.ten }.to raise_error(NoMethodError)
+    end
+
+    it 'returns an integer for non-integer division results' do
+      expect(Calc.new.one.divided_by.two).to be_an(Integer)
+    end
+
+    it 'calculates zero times any number' do
+      expect(Calc.new.zero.times.five).to eq(0)
+    end
+
+    it 'calculates any number minus zero' do
+      expect(Calc.new.five.minus.zero).to eq(5)
+    end
+
+    it 'handles large numbers' do
+      expect(Calc.new.five.times.nine).to eq(45)
+    end
+
+    it 'handles negative results correctly' do
+      expect(Calc.new.one.minus.two).to eq(-1)
+    end
+
     it 'raises an error when dividing by zero' do
       expect { Calc.new.one.divided_by.zero }.to raise_error(RuntimeError, 'Division by zero error')
     end
